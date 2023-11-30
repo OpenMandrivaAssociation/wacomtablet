@@ -1,0 +1,67 @@
+%define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 ] && echo -n un; echo -n stable)
+#define git 20231130
+
+Summary:	Wacom tablet support for Plasma 6
+Name:		plasma6-wacomtablet
+Version:	5.90.0
+Release:	1
+License:	GPLv2+
+Group:		Graphical desktop/KDE
+Url:		https://invent.kde.org/plasma/wacomtablet
+%if 0%{?git:1}
+Source0:	https://invent.kde.org/plasma/wacomtablet/-/archive/master/wacomtablet-master.tar.bz2#/wacomtablet-%{git}.tar.bz2
+%else
+Source0:	http://download.kde.org/%{stable}/plasma/%{version}/wacomtablet-%{version}.tar.xz
+%endif
+BuildRequires:	cmake(ECM)
+BuildRequires:	cmake(Qt6)
+BuildRequires:	pkgconfig(libwacom)
+BuildRequires:	cmake(KF6Plasma5Support)
+BuildRequires:	cmake(KF6WindowSystem)
+BuildRequires:	cmake(KF6Notifications)
+BuildRequires:	cmake(KF6DBusAddons)
+BuildRequires:	cmake(KF6DocTools)
+BuildRequires:	cmake(KF6KCMUtils)
+BuildRequires:	cmake(KF6KIO)
+BuildRequires:	cmake(KF6CoreAddons)
+BuildRequires:	cmake(KF6I18n)
+BuildRequires:	cmake(KF6GlobalAccel)
+BuildRequires:	cmake(KF6Config)
+BuildRequires:	cmake(KF6XmlGui)
+BuildRequires:	cmake(KF6WidgetsAddons)
+BuildRequires:	cmake(KF6WindowSystem)
+BuildRequires:	cmake(KF6Notifications)
+BuildRequires:	pkgconfig(xorg-wacom)
+
+%description
+Wacom tablet support for Plasma 6
+
+%prep
+%autosetup -p1 -n wacomtablet-%{?git:master}%{!?git:%{version}}
+%cmake \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
+	-G Ninja
+
+%build
+%ninja_build -C build
+
+%install
+%ninja_install -C build
+
+%find_lang wacomtablet --all-name --with-html
+
+%files -f wacomtablet.lang
+%{_bindir}/kde_wacom_tabletfinder
+%{_qtdir}/plugins/kf6/kded/wacomtablet.so
+%{_qtdir}/plugins/plasma/dataengine/plasma_engine_wacomtablet.so
+%{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_wacomtablet.so
+%{_datadir}/applications/kcm_wacomtablet.desktop
+%{_datadir}/applications/kde_wacom_tabletfinder.desktop
+%{_datadir}/dbus-1/interfaces/org.kde.Wacom.xml
+%{_datadir}/knotifications6/wacomtablet.notifyrc
+%{_datadir}/metainfo/org.kde.plasma.wacomtablet.appdata.xml
+%{_datadir}/metainfo/org.kde.wacomtablet.metainfo.xml
+%{_datadir}/plasma/plasmoids/org.kde.plasma.wacomtablet
+%{_datadir}/plasma/services/wacomtablet.operations
+%{_datadir}/qlogging-categories6/wacomtablet.categories
+%{_datadir}/wacomtablet
