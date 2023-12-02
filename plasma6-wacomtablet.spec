@@ -15,6 +15,7 @@ Source0:	http://download.kde.org/%{stable}/plasma/%{version}/wacomtablet-%{versi
 %endif
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(Qt6)
+BuildRequires:	cmake(Qt6Test)
 BuildRequires:	pkgconfig(libwacom)
 BuildRequires:	cmake(KF6Plasma5Support)
 BuildRequires:	cmake(KF6WindowSystem)
