@@ -31,6 +31,8 @@ BuildRequires:	cmake(KF6XmlGui)
 BuildRequires:	cmake(KF6WidgetsAddons)
 BuildRequires:	cmake(KF6WindowSystem)
 BuildRequires:	cmake(KF6Notifications)
+BuildRequires:	cmake(Plasma) >= 5.90.0
+BuildRequires:	cmake(PlasmaQuick)
 BuildRequires:	pkgconfig(xorg-wacom)
 
 %description
