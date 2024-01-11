@@ -3,7 +3,7 @@
 
 Summary:	Wacom tablet support for Plasma 6
 Name:		plasma6-wacomtablet
-Version:	5.91.0
+Version:	5.92.0
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
@@ -17,7 +17,7 @@ BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(Qt6)
 BuildRequires:	cmake(Qt6Test)
 BuildRequires:	pkgconfig(libwacom)
-BuildRequires:	cmake(KF6Plasma5Support)
+BuildRequires:	cmake(Plasma5Support)
 BuildRequires:	cmake(KF6WindowSystem)
 BuildRequires:	cmake(KF6Notifications)
 BuildRequires:	cmake(KF6DBusAddons)
