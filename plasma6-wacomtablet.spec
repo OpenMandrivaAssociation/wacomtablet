@@ -1,15 +1,17 @@
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 ] && echo -n un; echo -n stable)
-#define git 20231130
+%define git 20240217
+%define gitbranch Plasma/6.0
+%define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Summary:	Wacom tablet support for Plasma 6
 Name:		plasma6-wacomtablet
-Version:	5.93.0
+Version:	5.94.0
 Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://invent.kde.org/plasma/wacomtablet
 %if 0%{?git:1}
-Source0:	https://invent.kde.org/plasma/wacomtablet/-/archive/master/wacomtablet-master.tar.bz2#/wacomtablet-%{git}.tar.bz2
+Source0:	https://invent.kde.org/plasma/wacomtablet/-/archive/%{gitbranch}/wacomtablet-%{gitbranchd}.tar.bz2#/wacomtablet-%{git}.tar.bz2
 %else
 Source0:	http://download.kde.org/%{stable}/plasma/%{version}/wacomtablet-%{version}.tar.xz
 %endif
@@ -41,7 +43,7 @@ BuildRequires:	pkgconfig(xi)
 Wacom tablet support for Plasma 6
 
 %prep
-%autosetup -p1 -n wacomtablet-%{?git:master}%{!?git:%{version}}
+%autosetup -p1 -n wacomtablet-%{?git:%{gitbranchd}}%{!?git:%{version}}
 %cmake \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
 	-G Ninja
