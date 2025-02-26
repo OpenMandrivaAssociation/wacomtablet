@@ -38,6 +38,7 @@ BuildRequires:	cmake(Plasma) >= 5.90.0
 BuildRequires:	cmake(PlasmaQuick)
 BuildRequires:	pkgconfig(xorg-wacom)
 BuildRequires:	pkgconfig(xi)
+BuildRequires:	pkgconfig(xkbcommon)
 
 %description
 Wacom tablet support for Plasma 6
