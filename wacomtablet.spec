@@ -4,9 +4,9 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Summary:	Wacom tablet support for Plasma 6
-Name:		plasma6-wacomtablet
+Name:		wacomtablet
 Version:	6.3.4
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://invent.kde.org/plasma/wacomtablet
@@ -39,25 +39,17 @@ BuildRequires:	cmake(PlasmaQuick)
 BuildRequires:	pkgconfig(xorg-wacom)
 BuildRequires:	pkgconfig(xi)
 BuildRequires:	pkgconfig(xkbcommon)
+# Renamed after 6.0 2025-05-03
+%rename plasma6-wacomtablet
+
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
 %description
 Wacom tablet support for Plasma 6
 
-%prep
-%autosetup -p1 -n wacomtablet-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-
-%find_lang wacomtablet --all-name --with-html
-
-%files -f wacomtablet.lang
+%files -f %{name}.lang
 %{_bindir}/kde_wacom_tabletfinder
 %{_qtdir}/plugins/kf6/kded/wacomtablet.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_wacomtablet.so
