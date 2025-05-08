@@ -5,8 +5,8 @@
 
 Summary:	Wacom tablet support for Plasma 6
 Name:		wacomtablet
-Version:	6.3.4
-Release:	3
+Version:	6.3.5
+Release:	1
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://invent.kde.org/plasma/wacomtablet
